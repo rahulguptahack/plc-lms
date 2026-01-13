@@ -1,80 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Course | PLC LMS</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <title>Course View | PLC LMS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        .course-layout{
+            display:grid;
+            grid-template-columns: 70% 30%;
+            gap:20px;
+            margin-top:30px;
+        }
+
+        .video-box{
+            background:#fff;
+            padding:15px;
+            border-radius:10px;
+            box-shadow:0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .video-box iframe{
+            width:100%;
+            height:380px;
+            border-radius:8px;
+        }
+
+        .video-box h2{
+            margin:15px 0 5px;
+        }
+
+        .video-box p{
+            font-size:14px;
+            color:#555;
+        }
+
+        .lesson-box{
+            background:#fff;
+            padding:15px;
+            border-radius:10px;
+            box-shadow:0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .lesson-box h3{
+            margin-bottom:15px;
+        }
+
+        .lesson{
+            padding:10px;
+            border-bottom:1px solid #eee;
+            cursor:pointer;
+            font-size:14px;
+        }
+
+        .lesson:hover{
+            background:#f4f6f9;
+        }
+
+        .lesson.active{
+            background:#1f8ef1;
+            color:#fff;
+        }
+
+        @media(max-width:900px){
+            .course-layout{
+                grid-template-columns:1fr;
+            }
+        }
+    </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
-  <div class="container header-container">
-    <div class="logo">PLC Training LMS</div>
-    <nav>
-      <a href="courses.html">Back to Courses</a>
-    </nav>
-  </div>
+    <div class="container header-container">
+        <div class="logo">PLC Training LMS</div>
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="courses.html">Courses</a>
+        </nav>
+    </div>
 </header>
 
-<section class="container" style="padding:40px 0;">
-  <div class="auth-box">
-    <h2 id="courseTitle">Course Title</h2>
-    <p id="courseDesc" style="margin-bottom:20px;">Course description</p>
+<!-- COURSE VIEW -->
+<section class="container" style="min-height:80vh;">
 
-    <div style="position:relative;padding-bottom:56.25%;height:0;overflow:hidden;">
-      <iframe id="courseVideo"
-        style="position:absolute;top:0;left:0;width:100%;height:100%;"
-        src=""
-        frameborder="0"
-        allowfullscreen>
-      </iframe>
+    <div class="course-layout">
+
+        <!-- VIDEO SECTION -->
+        <div class="video-box">
+            <iframe id="courseVideo"
+                src="https://www.youtube.com/embed/nS8QsnFlKtM"
+                allowfullscreen>
+            </iframe>
+
+            <h2 id="lessonTitle">Lesson 1: PLC Introduction</h2>
+            <p>Basic overview of PLC, its role in industrial automation.</p>
+        </div>
+
+        <!-- LESSON LIST -->
+        <div class="lesson-box">
+            <h3>Course Lessons</h3>
+
+            <div class="lesson active"
+                 onclick="loadLesson(this,'nS8QsnFlKtM','Lesson 1: PLC Introduction')">
+                ▶ Lesson 1 – PLC Introduction
+            </div>
+
+            <div class="lesson"
+                 onclick="loadLesson(this,'nS8QsnFlKtM','Lesson 2: PLC Hardware')">
+                ▶ Lesson 2 – PLC Hardware
+            </div>
+
+            <div class="lesson"
+                 onclick="loadLesson(this,'nS8QsnFlKtM','Lesson 3: Inputs & Outputs')">
+                ▶ Lesson 3 – Inputs & Outputs
+            </div>
+
+            <div class="lesson"
+                 onclick="loadLesson(this,'nS8QsnFlKtM','Lesson 4: Basic Logic')">
+                ▶ Lesson 4 – Basic Logic
+            </div>
+
+        </div>
+
     </div>
-  </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  © 2026 Rahul Gupta | PLC Training
+    © 2026 Rahul Gupta | PLC Training
 </footer>
 
+<!-- SCRIPT -->
 <script>
-/* Login Check */
-if(localStorage.getItem("loggedIn") !== "true"){
-    window.location.href = "login.html";
-}
-
-/* Read URL parameter */
-const params = new URLSearchParams(window.location.search);
-const course = params.get("course");
-
-/* Course Data (FREE phase – YouTube allowed) */
-const courses = {
-    plc_basic:{
-        title:"PLC Basics – Introduction",
-        desc:"PLC hardware, working principle and overview.",
-        video:"https://www.youtube.com/embed/nS8QsnFlKtM"
-    },
-    delta_plc:{
-        title:"Delta PLC – Ladder Programming",
-        desc:"Basic to intermediate ladder logic examples.",
-        video:"https://www.youtube.com/embed/VIDEO_ID_2"
-    },
-    sensors:{
-        title:"Industrial Sensors & Wiring",
-        desc:"PNP/NPN sensors and field wiring basics.",
-        video:"https://www.youtube.com/embed/VIDEO_ID_3"
+    // LOGIN CHECK
+    if(localStorage.getItem("loggedIn") !== "true"){
+        alert("Please login first");
+        window.location.href = "login.html";
     }
-};
 
-/* Load Course */
-if(course && courses[course]){
-    document.getElementById("courseTitle").innerText = courses[course].title;
-    document.getElementById("courseDesc").innerText = courses[course].desc;
-    document.getElementById("courseVideo").src = courses[course].video;
-}else{
-    document.getElementById("courseTitle").innerText = "Course Not Found";
-    document.getElementById("courseDesc").innerText = "Invalid course selection.";
-}
+    function loadLesson(element, videoId, title){
+        document.getElementById("courseVideo").src =
+            "https://www.youtube.com/embed/" + videoId;
+
+        document.getElementById("lessonTitle").innerText = title;
+
+        document.querySelectorAll(".lesson").forEach(l=>{
+            l.classList.remove("active");
+        });
+
+        element.classList.add("active");
+    }
 </script>
 
 </body>
