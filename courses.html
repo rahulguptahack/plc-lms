@@ -1,71 +1,140 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Courses | PLC LMS</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <title>Courses | PLC LMS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* COURSE GRID */
+        .courses-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
+            gap:25px;
+            margin-top:30px;
+        }
+
+        .course-card{
+            background:#fff;
+            border-radius:10px;
+            overflow:hidden;
+            box-shadow:0 8px 20px rgba(0,0,0,0.1);
+            transition:0.3s;
+        }
+
+        .course-card:hover{
+            transform:translateY(-5px);
+        }
+
+        .course-card img{
+            width:100%;
+            height:160px;
+            object-fit:cover;
+        }
+
+        .course-content{
+            padding:15px;
+        }
+
+        .course-content h3{
+            font-size:18px;
+            margin-bottom:10px;
+        }
+
+        .course-content p{
+            font-size:14px;
+            color:#555;
+            margin-bottom:15px;
+        }
+
+        .course-footer{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+        }
+
+        .badge{
+            background:#28a745;
+            color:#fff;
+            font-size:12px;
+            padding:4px 8px;
+            border-radius:4px;
+        }
+
+        .locked{
+            background:#dc3545;
+        }
+    </style>
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
-  <div class="container header-container">
-    <div class="logo">PLC Training LMS</div>
-    <nav>
-      <a href="#" id="logoutBtn">Logout</a>
-    </nav>
-  </div>
+    <div class="container header-container">
+        <div class="logo">PLC Training LMS</div>
+        <nav>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="courses.html">Courses</a>
+            <a href="login.html">Logout</a>
+        </nav>
+    </div>
 </header>
 
-<section class="container" style="padding:40px 0;">
-  <h2 style="margin-bottom:20px;">Available Courses</h2>
+<!-- COURSES -->
+<section class="container" style="min-height:80vh;">
+    <h2 style="margin-top:30px;">Available Courses</h2>
 
-  <!-- Course 1 -->
-  <div class="auth-box" style="margin-bottom:20px;">
-    <h3>PLC Basics – Introduction</h3>
-    <p>PLC kya hota hai, hardware overview</p>
-    <br>
-    <a href="course-view.html?course=plc_basic">
-      <button class="btn-primary">View Course</button>
-    </a>
-  </div>
+    <div class="courses-grid">
 
-  <!-- Course 2 -->
-  <div class="auth-box" style="margin-bottom:20px;">
-    <h3>Delta PLC – Ladder Programming</h3>
-    <p>Practical ladder logic examples</p>
-    <br>
-    <a href="course-view.html?course=delta_plc">
-      <button class="btn-primary">View Course</button>
-    </a>
-  </div>
+        <!-- COURSE 1 -->
+        <div class="course-card">
+            <img src="https://img.youtube.com/vi/nS8QsnFlKtM/hqdefault.jpg">
+            <div class="course-content">
+                <h3>PLC Basics</h3>
+                <p>Introduction to PLC, Inputs, Outputs & Logic</p>
 
-  <!-- Course 3 -->
-  <div class="auth-box">
-    <h3>Industrial Sensors & Wiring</h3>
-    <p>PNP/NPN, field wiring basics</p>
-    <br>
-    <a href="course-view.html?course=sensors">
-      <button class="btn-primary">View Course</button>
-    </a>
-  </div>
+                <div class="course-footer">
+                    <span class="badge">FREE</span>
+                    <a href="course-view.html?course=plc-basics" class="btn-primary">View</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- COURSE 2 -->
+        <div class="course-card">
+            <img src="https://img.youtube.com/vi/nS8QsnFlKtM/hqdefault.jpg">
+            <div class="course-content">
+                <h3>PLC Advanced Logic</h3>
+                <p>Timers, Counters, Interlocks & Safety</p>
+
+                <div class="course-footer">
+                    <span class="badge locked">LOCKED</span>
+                    <button class="btn-primary" onclick="loginAlert()">View</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  © 2026 Rahul Gupta | PLC Training
+    © 2026 Rahul Gupta | PLC Training
 </footer>
 
+<!-- LOGIN CHECK -->
 <script>
-/* Login Check */
 if(localStorage.getItem("loggedIn") !== "true"){
+    alert("Please login to access courses");
     window.location.href = "login.html";
 }
 
-/* Logout */
-document.getElementById("logoutBtn").addEventListener("click", function(){
-    localStorage.removeItem("loggedIn");
-    window.location.href = "login.html";
-});
+function loginAlert(){
+    alert("This course will be available soon / Paid course");
+}
 </script>
 
 </body>
