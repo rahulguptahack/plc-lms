@@ -5,54 +5,85 @@
   <title>PLC Training LMS</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- CSS LINK (IMPORTANT) -->
+  <!-- CSS -->
   <link rel="stylesheet" href="css/style.css">
+
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-<header>
-  <div class="container header-container">
-    <div class="logo">PLC Training LMS</div>
+<!-- ===== TOP BAR ===== -->
+<div class="top-bar">
+  <div class="container">
+    <span>📞 +91 90000 00000</span>
+    <span>📧 info@plctraining.com</span>
+  </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header class="header">
+  <div class="container header-flex">
+    <div class="logo">PLC<span>TRAINING</span></div>
     <nav>
-      <a href="index.html">Home</a>
+      <a class="active" href="#">Home</a>
       <a href="courses.html">Courses</a>
-      <a href="login.html">Login</a>
+      <a href="#">About</a>
+      <a href="#">Contact</a>
+      <a class="btn-login" href="login.html">Login</a>
     </nav>
   </div>
 </header>
 
+<!-- ===== HERO SECTION ===== -->
 <section class="hero">
-  <div class="container hero-grid">
+  <div class="hero-overlay"></div>
 
-    <div>
-      <h1>Industrial PLC Training</h1>
-      <p>Step-by-Step Practical Training on Delta, Siemens & Mitsubishi PLC</p>
-      <a href="courses.html" class="btn-primary">Start Learning</a>
+  <div class="container hero-content">
+    <h4>THE BEST PLATFORM FOR</h4>
+    <h1>INDUSTRIAL PLC<br>TRAINING</h1>
+    <p>Practical step-by-step training on Delta, Siemens & Mitsubishi PLC</p>
+
+    <a href="courses.html" class="btn-primary">START LEARNING</a>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="features">
+  <div class="container feature-grid">
+
+    <div class="feature-card">
+      <h3>Industry Experts</h3>
+      <p>10+ years real industrial experience based training</p>
     </div>
 
-    <div class="video-box">
-      <iframe
-        src="https://www.youtube.com/embed/nS8QsnFlKtM"
-        allowfullscreen>
-      </iframe>
+    <div class="feature-card">
+      <h3>Practical Learning</h3>
+      <p>Real PLC programs, wiring & fault logic</p>
+    </div>
+
+    <div class="feature-card">
+      <h3>Job Oriented</h3>
+      <p>Automation engineer interview & plant logic</p>
     </div>
 
   </div>
 </section>
 
+<!-- ===== COURSES ===== -->
 <section class="courses">
   <div class="container">
-    <h2>Available Courses</h2>
+    <h2>Popular Courses</h2>
 
     <div class="course-grid">
       <div class="course-card">
         <h3>PLC Basics</h3>
-        <p>Digital I/O, Ladder Logic, Timers & Counters</p>
+        <p>Digital I/O, Ladder, Timers & Counters</p>
       </div>
 
       <div class="course-card">
         <h3>Industrial Automation</h3>
-        <p>Conveyors, Sensors, VFD, Servo Logic</p>
+        <p>Conveyor, Sensors, VFD, Servo</p>
       </div>
 
       <div class="course-card">
@@ -60,11 +91,11 @@
         <p>PID, Modbus, HMI & SCADA</p>
       </div>
     </div>
-
   </div>
 </section>
 
-<footer>
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
   © 2026 Rahul Gupta | Industrial PLC Training LMS
 </footer>
 
