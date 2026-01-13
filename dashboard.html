@@ -2,144 +2,141 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Student Dashboard | PLC LMS</title>
+    <title>Dashboard | PLC LMS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <link rel="stylesheet" href="css/style.css">
+
     <style>
-        .dashboard{
-            padding:40px 0;
+        .dashboard-header{
+            margin-top:30px;
         }
-        .welcome{
-            margin-bottom:30px;
+
+        .dashboard-header h2{
+            margin-bottom:5px;
         }
+
         .course-grid{
-            display:flex;
-            flex-wrap:wrap;
+            display:grid;
+            grid-template-columns:repeat(auto-fit, minmax(260px,1fr));
             gap:25px;
+            margin-top:30px;
         }
-        .dash-card{
+
+        .course-card{
             background:#fff;
-            width:300px;
-            padding:20px;
             border-radius:10px;
-            box-shadow:0 2px 8px rgba(0,0,0,0.1);
+            padding:20px;
+            box-shadow:0 8px 20px rgba(0,0,0,0.1);
         }
-        .dash-card h3{
+
+        .course-card h3{
             margin-bottom:10px;
         }
+
         .progress-bar{
-            background:#e9ecef;
-            border-radius:10px;
+            background:#e0e0e0;
+            border-radius:20px;
             overflow:hidden;
             height:10px;
             margin:10px 0 15px;
         }
+
         .progress{
-            background:#0d6efd;
+            background:#1f8ef1;
             height:100%;
-            width:0%;
+            width:40%;
         }
-        .dash-card button{
-            background:#198754;
-            color:#fff;
-            border:none;
-            padding:8px 12px;
-            border-radius:5px;
-            cursor:pointer;
+
+        .course-footer{
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
         }
-        .locked{
-            background:#6c757d !important;
-            cursor:not-allowed;
+
+        .status{
+            font-size:13px;
+            color:#555;
         }
     </style>
 </head>
 <body>
 
-<!-- Header -->
+<!-- HEADER -->
 <header>
     <div class="container header-container">
-        <div class="logo">PLC Training</div>
+        <div class="logo">PLC Training LMS</div>
         <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="courses.html">Courses</a></li>
-                <li><a href="dashboard.html" class="login-btn">Dashboard</a></li>
-            </ul>
+            <a href="dashboard.html">Dashboard</a>
+            <a href="courses.html">Courses</a>
+            <a href="#" onclick="logout()">Logout</a>
         </nav>
     </div>
 </header>
 
-<!-- Dashboard -->
-<section class="dashboard">
-    <div class="container">
-        <div class="welcome">
-            <h2>Welcome, Student 👋</h2>
-            <p>Your enrolled courses and progress</p>
+<!-- DASHBOARD -->
+<section class="container" style="min-height:80vh;">
+
+    <div class="dashboard-header">
+        <h2>Welcome 👋</h2>
+        <p id="userEmail"></p>
+    </div>
+
+    <h3 style="margin-top:30px;">My Courses</h3>
+
+    <div class="course-grid">
+
+        <!-- COURSE CARD -->
+        <div class="course-card">
+            <h3>PLC Basics</h3>
+            <p>Industrial PLC fundamentals</p>
+
+            <div class="progress-bar">
+                <div class="progress"></div>
+            </div>
+
+            <div class="course-footer">
+                <span class="status">40% Completed</span>
+                <a href="course-view.html" class="btn-primary">Continue</a>
+            </div>
         </div>
 
-        <div class="course-grid" id="dashboardCourses">
-            <!-- Cards injected by JS -->
+        <!-- COURSE CARD -->
+        <div class="course-card">
+            <h3>PLC Advanced Logic</h3>
+            <p>Timers, Counters, Safety</p>
+
+            <div class="progress-bar">
+                <div class="progress" style="width:0%;"></div>
+            </div>
+
+            <div class="course-footer">
+                <span class="status">Not Started</span>
+                <a href="courses.html" class="btn-primary">View</a>
+            </div>
         </div>
+
     </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-    <div class="container footer-container">
-        <p>© 2026 Rahul Gupta | PLC Training</p>
-    </div>
+    © 2026 Rahul Gupta | PLC Training
 </footer>
 
 <script>
-/*
- TEMPORARY DEMO DATA
- Later this will come from backend after login
-*/
-const enrolledCourses = [
-    {
-        id: "plc-basic",
-        title: "PLC Basics",
-        progress: 60,
-        locked: false
-    },
-    {
-        id: "plc-advanced",
-        title: "PLC Advanced",
-        progress: 0,
-        locked: true
-    },
-    {
-        id: "machine-logic",
-        title: "Machine Logic Training",
-        progress: 0,
-        locked: true
+    // LOGIN CHECK
+    if(localStorage.getItem("loggedIn") !== "true"){
+        window.location.href = "login.html";
     }
-];
 
-const container = document.getElementById("dashboardCourses");
+    document.getElementById("userEmail").innerText =
+        "Logged in as: " + localStorage.getItem("userEmail");
 
-enrolledCourses.forEach(course => {
-    const card = document.createElement("div");
-    card.className = "dash-card";
-
-    card.innerHTML = `
-        <h3>${course.title}</h3>
-        <div class="progress-bar">
-            <div class="progress" style="width:${course.progress}%"></div>
-        </div>
-        <p>Progress: ${course.progress}%</p>
-        <button class="${course.locked ? 'locked' : ''}"
-            ${course.locked ? 'disabled' : ''}
-            onclick="openCourse('${course.id}')">
-            ${course.locked ? 'Locked' : 'Continue'}
-        </button>
-    `;
-
-    container.appendChild(card);
-});
-
-function openCourse(courseId){
-    window.location.href = "course-view.html?id=" + courseId;
-}
+    function logout(){
+        localStorage.clear();
+        window.location.href = "login.html";
+    }
 </script>
 
 </body>
