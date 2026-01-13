@@ -136,6 +136,45 @@ function loginAlert(){
     alert("This course will be available soon / Paid course");
 }
 </script>
+<script>
+/* ===============================
+   BASIC CONTENT PROTECTION
+================================ */
+
+// Disable right click
+document.addEventListener("contextmenu", function(e){
+    e.preventDefault();
+});
+
+// Disable text selection
+document.addEventListener("selectstart", function(e){
+    e.preventDefault();
+});
+
+// Disable key shortcuts
+document.addEventListener("keydown", function(e){
+    if (
+        e.keyCode === 123 || // F12
+        (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || // Ctrl+Shift+I/J
+        (e.ctrlKey && e.keyCode === 85) // Ctrl+U
+    ) {
+        e.preventDefault();
+        alert("⚠️ Developer tools are disabled for content protection.");
+    }
+});
+
+// Console warning
+console.clear();
+console.log(
+    "%cPLC Training LMS",
+    "color:#1f8ef1;font-size:20px;font-weight:bold;"
+);
+console.log(
+    "%cUnauthorized copying or redistribution is prohibited.",
+    "color:red;font-size:14px;"
+);
+</script>
 
 </body>
 </html>
+
