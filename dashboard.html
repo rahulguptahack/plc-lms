@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Dashboard | PLC LMS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .dashboard{
+            padding:40px 0;
+        }
+        .welcome{
+            margin-bottom:30px;
+        }
+        .course-grid{
+            display:flex;
+            flex-wrap:wrap;
+            gap:25px;
+        }
+        .dash-card{
+            background:#fff;
+            width:300px;
+            padding:20px;
+            border-radius:10px;
+            box-shadow:0 2px 8px rgba(0,0,0,0.1);
+        }
+        .dash-card h3{
+            margin-bottom:10px;
+        }
+        .progress-bar{
+            background:#e9ecef;
+            border-radius:10px;
+            overflow:hidden;
+            height:10px;
+            margin:10px 0 15px;
+        }
+        .progress{
+            background:#0d6efd;
+            height:100%;
+            width:0%;
+        }
+        .dash-card button{
+            background:#198754;
+            color:#fff;
+            border:none;
+            padding:8px 12px;
+            border-radius:5px;
+            cursor:pointer;
+        }
+        .locked{
+            background:#6c757d !important;
+            cursor:not-allowed;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <div class="container header-container">
+        <div class="logo">PLC Training</div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="courses.html">Courses</a></li>
+                <li><a href="dashboard.html" class="login-btn">Dashboard</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<!-- Dashboard -->
+<section class="dashboard">
+    <div class="container">
+        <div class="welcome">
+            <h2>Welcome, Student 👋</h2>
+            <p>Your enrolled courses and progress</p>
+        </div>
+
+        <div class="course-grid" id="dashboardCourses">
+            <!-- Cards injected by JS -->
+        </div>
+    </div>
+</section>
+
+<footer>
+    <div class="container footer-container">
+        <p>© 2026 Rahul Gupta | PLC Training</p>
+    </div>
+</footer>
+
+<script>
+/*
+ TEMPORARY DEMO DATA
+ Later this will come from backend after login
+*/
+const enrolledCourses = [
+    {
+        id: "plc-basic",
+        title: "PLC Basics",
+        progress: 60,
+        locked: false
+    },
+    {
+        id: "plc-advanced",
+        title: "PLC Advanced",
+        progress: 0,
+        locked: true
+    },
+    {
+        id: "machine-logic",
+        title: "Machine Logic Training",
+        progress: 0,
+        locked: true
+    }
+];
+
+const container = document.getElementById("dashboardCourses");
+
+enrolledCourses.forEach(course => {
+    const card = document.createElement("div");
+    card.className = "dash-card";
+
+    card.innerHTML = `
+        <h3>${course.title}</h3>
+        <div class="progress-bar">
+            <div class="progress" style="width:${course.progress}%"></div>
+        </div>
+        <p>Progress: ${course.progress}%</p>
+        <button class="${course.locked ? 'locked' : ''}"
+            ${course.locked ? 'disabled' : ''}
+            onclick="openCourse('${course.id}')">
+            ${course.locked ? 'Locked' : 'Continue'}
+        </button>
+    `;
+
+    container.appendChild(card);
+});
+
+function openCourse(courseId){
+    window.location.href = "course-view.html?id=" + courseId;
+}
+</script>
+
+</body>
+</html>
