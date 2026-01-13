@@ -1,37 +1,62 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Signup | PLC LMS</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <title>Signup | PLC LMS</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+<!-- HEADER -->
 <header>
-  <div class="container header-container">
-    <div class="logo">PLC Training LMS</div>
-  </div>
+    <div class="container header-container">
+        <div class="logo">PLC Training LMS</div>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="courses.html">Courses</a>
+            <a href="login.html">Login</a>
+        </nav>
+    </div>
 </header>
 
+<!-- SIGNUP SECTION -->
 <section class="auth-section">
-  <div class="auth-box">
-    <h2>Create Account</h2>
+    <div class="auth-box">
+        <h2>Create Account</h2>
 
-    <form>
-      <input type="text" placeholder="Full Name" required>
-      <input type="email" placeholder="Email" required>
-      <input type="password" placeholder="Password" required>
-      <button class="btn-primary">Signup</button>
-    </form>
+        <form id="signupForm">
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email Address" required>
+            <input type="password" placeholder="Password" required>
 
-    <p>Already have an account? <a href="login.html">Login</a></p>
-  </div>
+            <button type="submit" class="btn-primary" style="width:100%;">
+                Signup
+            </button>
+        </form>
+
+        <p>
+            Already have an account?
+            <a href="login.html">Login</a>
+        </p>
+    </div>
 </section>
 
+<!-- FOOTER -->
 <footer>
-  © 2026 Rahul Gupta | PLC Training
+    © 2026 Rahul Gupta | PLC Training
 </footer>
+
+<!-- SIGNUP SCRIPT (UI ONLY) -->
+<script>
+document.getElementById("signupForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    alert("Signup successful (UI only)");
+    window.location.href = "login.html";
+});
+</script>
 
 </body>
 </html>
