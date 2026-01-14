@@ -7,6 +7,7 @@
 
 body {
   color: #333;
+  background: #fff;
 }
 
 /* ===== COMMON ===== */
@@ -73,14 +74,14 @@ nav a:hover {
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0.65);
 }
 .hero-content {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
   color: #fff;
-  max-width: 600px;
+  max-width: 650px;
 }
 .hero h4 {
   color: #f5b400;
@@ -92,21 +93,22 @@ nav a:hover {
 }
 .hero p {
   margin-bottom: 25px;
-  line-height: 1.6;
+  line-height: 1.7;
 }
 .btn-primary {
   background: #f5b400;
   color: #000;
-  padding: 12px 28px;
+  padding: 14px 30px;
   text-decoration: none;
   font-weight: 600;
   border-radius: 5px;
+  display: inline-block;
 }
 
 /* ===== FEATURES ===== */
 .features {
   background: #111;
-  padding: 50px 0;
+  padding: 60px 0;
   margin-top: -80px;
   position: relative;
   z-index: 5;
@@ -128,7 +130,7 @@ nav a:hover {
 
 /* ===== COURSES ===== */
 .courses {
-  padding: 80px 0;
+  padding: 90px 0;
 }
 .courses h2 {
   text-align: center;
@@ -146,8 +148,8 @@ nav a:hover {
   transition: 0.3s;
 }
 .course-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  transform: translateY(-6px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
 }
 
 /* ===== FOOTER ===== */
@@ -156,4 +158,15 @@ nav a:hover {
   color: #aaa;
   text-align: center;
   padding: 20px 0;
+  font-size: 14px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width: 768px) {
+  .hero h1 {
+    font-size: 38px;
+  }
+  nav a {
+    margin-left: 15px;
+  }
 }
