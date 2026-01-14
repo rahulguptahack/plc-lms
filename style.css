@@ -68,7 +68,7 @@ nav a:hover {
 /* ===== HERO ===== */
 .hero {
   height: 100vh;
-  background: url("../images/hero.jpg") center/cover no-repeat;
+  background: url("hero.jpg") center/cover no-repeat;
   position: relative;
 }
 .hero-overlay {
@@ -170,3 +170,4 @@ nav a:hover {
     margin-left: 15px;
   }
 }
+
