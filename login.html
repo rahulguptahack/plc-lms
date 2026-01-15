@@ -3,52 +3,143 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Premium Login | Corporate Portal</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Premium Login | PLC LMS</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="login.css">
+    
+    <style>
+        /* --- Sabse Pehla Premium CSS Look --- */
+        :root {
+            --primary-gradient: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+            --bg-gradient: radial-gradient(circle at top left, #0f172a, #1e1b4b, #134e4a);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.125);
+            --text-main: #ffffff;
+            --text-dim: #94a3b8;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-gradient);
+            overflow: hidden;
+            color: var(--text-main);
+        }
+
+        /* Background animated glow */
+        .background-overlay::before {
+            content: ''; position: absolute; width: 400px; height: 400px;
+            background: rgba(58, 123, 213, 0.2); border-radius: 50%;
+            filter: blur(100px); top: 10%; left: 10%; z-index: -1;
+        }
+
+        /* Glass Card */
+        .login-card {
+            width: 100%; max-width: 420px; padding: 3rem 2.5rem;
+            background: var(--glass-bg); backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border); border-radius: 28px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            text-align: center; animation: slideUp 0.8s ease;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card-header h1 { font-size: 2rem; font-weight: 600; margin-bottom: 0.5rem; }
+        .card-header p { color: var(--text-dim); font-size: 0.95rem; margin-bottom: 2.5rem; }
+
+        /* Input Styling */
+        .input-group { margin-bottom: 1.25rem; text-align: left; position: relative; }
+        
+        input {
+            width: 100%; padding: 15px 15px 15px 45px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border); border-radius: 14px;
+            color: white; font-size: 1rem; outline: none; transition: var(--transition);
+        }
+
+        input:focus {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: #00d2ff;
+            box-shadow: 0 0 0 4px rgba(0, 210, 255, 0.1);
+        }
+
+        /* CSS Only Icons */
+        .input-group::before {
+            content: ''; position: absolute; left: 18px; top: 18px;
+            width: 18px; height: 18px; opacity: 0.5; transition: 0.3s;
+        }
+        .user-icon::before { border: 2px solid white; border-radius: 50%; width: 10px !important; height: 10px !important; left: 22px !important; }
+        
+        /* Premium Button */
+        .login-btn {
+            width: 100%; padding: 16px; border: none; border-radius: 14px;
+            background: var(--primary-gradient); color: white;
+            font-size: 1rem; font-weight: 600; cursor: pointer;
+            transition: var(--transition); margin-top: 1rem;
+            box-shadow: 0 10px 20px -5px rgba(0, 210, 255, 0.4);
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px -5px rgba(0, 210, 255, 0.5);
+            filter: brightness(1.1);
+        }
+
+        .card-footer { margin-top: 2rem; color: var(--text-dim); font-size: 0.9rem; }
+        .card-footer a { color: #00d2ff; text-decoration: none; font-weight: 500; }
+    </style>
 </head>
 <body>
 
     <div class="background-overlay"></div>
     
-    <main class="login-container">
-        <section class="login-card">
-            <header class="card-header">
-                <h1>Welcome Back</h1>
-                <p>Login to continue</p>
-            </header>
+    <main class="login-card">
+        <header class="card-header">
+            <h1>Welcome Back</h1>
+            <p>Login to your PLC Dashboard</p>
+        </header>
 
-            <form class="login-form">
-                <div class="input-group">
-                    <div class="input-wrapper">
-                        <i class="icon-user"></i>
-                        <input type="email" id="email" placeholder="Email Address" required>
-                    </div>
-                </div>
+        <form id="loginForm">
+            <div class="input-group">
+                <input type="email" id="email" placeholder="Email Address" required>
+            </div>
 
-                <div class="input-group">
-                    <div class="input-wrapper">
-                        <i class="icon-lock"></i>
-                        <input type="password" id="password" placeholder="Password" required>
-                    </div>
-                </div>
+            <div class="input-group">
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
 
-                <div class="form-actions">
-                    <a href="#" class="forgot-link">Forgot Password?</a>
-                </div>
+            <button type="submit" class="login-btn">
+                Sign In
+            </button>
+        </form>
 
-                <button type="submit" class="login-btn">
-                    <span>Sign In</span>
-                </button>
-            </form>
-
-            <footer class="card-footer">
-                <p>Don't have an account? <a href="#">Create Account</a></p>
-            </footer>
-        </section>
+        <footer class="card-footer">
+            <p>Don't have an account? <a href="signup.html">Create Account</a></p>
+        </footer>
     </main>
 
+    <script>
+        // --- Yeh function ab perfect kaam karega ---
+        document.getElementById("loginForm").addEventListener("submit", function(e){
+            e.preventDefault();
+            
+            // Login details save karna
+            localStorage.setItem("loggedIn", "true");
+            
+            // Success alert (Optional)
+            console.log("Login Success");
+            
+            // Course page par bhej dena
+            window.location.href = "courses.html";
+        });
+    </script>
 </body>
 </html>
