@@ -1,0 +1,220 @@
+/* style.css */
+
+/* --- Variables & Reset --- */
+:root {
+    --primary-gradient: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+    --bg-gradient: radial-gradient(circle at top left, #0f172a, #1e1b4b, #134e4a);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.125);
+    --text-main: #ffffff;
+    --text-dim: #94a3b8;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+/* --- Body & Background --- */
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-gradient);
+    overflow: hidden;
+}
+
+/* Animated Background shapes for depth */
+.background-overlay::before,
+.background-overlay::after {
+    content: '';
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    filter: blur(80px);
+    z-index: -1;
+}
+
+.background-overlay::before {
+    background: rgba(58, 123, 213, 0.3);
+    top: 10%;
+    left: 15%;
+}
+
+.background-overlay::after {
+    background: rgba(20, 184, 166, 0.2);
+    bottom: 10%;
+    right: 15%;
+}
+
+/* --- Login Card (Glassmorphism) --- */
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    padding: 3rem 2.5rem;
+    background: var(--glass-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    margin: 1rem;
+    animation: fadeIn 0.8s ease-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Typography --- */
+.card-header h1 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-bottom: 0.5rem;
+}
+
+.card-header p {
+    color: var(--text-dim);
+    font-size: 0.95rem;
+    margin-bottom: 2.5rem;
+}
+
+/* --- Input Fields & CSS Icons --- */
+.input-group {
+    margin-bottom: 1.25rem;
+    text-align: left;
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* CSS Only Icons using pseudo-elements */
+.icon-user, .icon-lock {
+    position: absolute;
+    left: 16px;
+    width: 18px;
+    height: 18px;
+    border: 2px solid var(--text-dim);
+    transition: var(--transition);
+}
+
+.icon-user { border-radius: 50%; }
+.icon-user::after {
+    content: '';
+    position: absolute;
+    bottom: -8px; left: -2px;
+    width: 18px; height: 8px;
+    border: 2px solid var(--text-dim);
+    border-radius: 10px 10px 0 0;
+}
+
+.icon-lock { border-radius: 3px; }
+.icon-lock::after {
+    content: '';
+    position: absolute;
+    top: -8px; left: 2px;
+    width: 10px; height: 10px;
+    border: 2px solid var(--text-dim);
+    border-radius: 5px 5px 0 0;
+}
+
+input {
+    width: 100%;
+    padding: 14px 14px 14px 48px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
+    border-radius: 12px;
+    color: white;
+    font-size: 0.95rem;
+    outline: none;
+    transition: var(--transition);
+}
+
+input:focus {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: #00d2ff;
+    box-shadow: 0 0 0 4px rgba(0, 210, 255, 0.1);
+}
+
+input:focus + i, 
+input:not(:placeholder-shown) + i {
+    border-color: #00d2ff;
+}
+
+/* --- Form Actions --- */
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2rem;
+}
+
+.forgot-link {
+    font-size: 0.85rem;
+    color: var(--text-dim);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.forgot-link:hover {
+    color: #00d2ff;
+}
+
+/* --- Login Button --- */
+.login-btn {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 12px;
+    background: var(--primary-gradient);
+    color: white;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+    box-shadow: 0 10px 15px -3px rgba(58, 123, 213, 0.3);
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 20px -3px rgba(58, 123, 213, 0.5);
+    filter: brightness(1.1);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+/* --- Footer --- */
+.card-footer {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    color: var(--text-dim);
+}
+
+.card-footer a {
+    color: #00d2ff;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 480px) {
+    .login-card {
+        padding: 2.5rem 1.5rem;
+    }
+    
+    .card-header h1 {
+        font-size: 1.75rem;
+    }
+}
