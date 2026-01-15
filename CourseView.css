@@ -1,0 +1,147 @@
+/* style.css & Internal CSS */
+:root {
+    --primary-blue: #3b82f6;
+    --accent-teal: #10b981;
+    --bg-dark: #0f172a;
+    --card-dark: #1e293b;
+    --text-white: #f8fafc;
+    --text-muted: #94a3b8;
+    --glass-border: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-white);
+    font-family: 'Inter', sans-serif;
+}
+
+/* Header Enhancements */
+header {
+    background: rgba(15, 23, 42, 0.9);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--glass-border);
+    padding: 15px 0;
+}
+
+.logo {
+    font-weight: 700;
+    background: linear-gradient(90deg, #60a5fa, #34d399);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Main Layout */
+.course-layout {
+    display: grid;
+    grid-template-columns: 1fr 350px; /* Video section wide, sidebar fixed width */
+    gap: 24px;
+    margin-top: 40px;
+    padding-bottom: 50px;
+}
+
+/* Video Section Styling */
+.video-box {
+    background: var(--card-dark);
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.video-box iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9; /* Perfect video ratio */
+    height: auto;
+    border-radius: 12px;
+    border: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+}
+
+.video-box h2 {
+    font-size: 1.5rem;
+    margin: 20px 0 10px;
+    font-weight: 600;
+}
+
+.video-box p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+
+/* Sidebar Lesson Box */
+.lesson-box {
+    background: var(--card-dark);
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    overflow: hidden; /* For smooth corners */
+    display: flex;
+    flex-direction: column;
+    max-height: 80vh;
+}
+
+.lesson-box h3 {
+    padding: 20px;
+    background: rgba(255,255,255,0.03);
+    font-size: 1.1rem;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.lesson-list-container {
+    overflow-y: auto; /* Scrollable lessons */
+}
+
+.lesson {
+    padding: 16px 20px;
+    border-bottom: 1px solid var(--glass-border);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.3s ease;
+    color: var(--text-muted);
+}
+
+/* Play Icon Placeholder (CSS only) */
+.lesson::before {
+    content: '▶';
+    font-size: 10px;
+    opacity: 0.5;
+}
+
+.lesson:hover {
+    background: rgba(59, 130, 246, 0.1);
+    color: var(--text-white);
+}
+
+.lesson.active {
+    background: linear-gradient(90deg, rgba(59, 130, 246, 0.2), transparent);
+    color: var(--primary-blue);
+    border-left: 4px solid var(--primary-blue);
+    font-weight: 600;
+}
+
+.lesson.active::before {
+    color: var(--primary-blue);
+    opacity: 1;
+}
+
+/* Responsive Fixes */
+@media(max-width: 1024px) {
+    .course-layout {
+        grid-template-columns: 1fr;
+    }
+    
+    .lesson-box {
+        max-height: none;
+    }
+}
+
+/* Custom Scrollbar for Lessons */
+.lesson-list-container::-webkit-scrollbar {
+    width: 6px;
+}
+.lesson-list-container::-webkit-scrollbar-thumb {
+    background: var(--glass-border);
+    border-radius: 10px;
+}
