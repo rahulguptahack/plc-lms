@@ -2,179 +2,294 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Courses | PLC LMS</title>
+    <title>Courses | Premium PLC LMS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- MAIN CSS -->
-    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
 
     <style>
-        /* COURSE GRID */
-        .courses-grid{
-            display:grid;
-            grid-template-columns:repeat(auto-fit, minmax(260px, 1fr));
-            gap:25px;
-            margin-top:30px;
+        /* --- ELITE INDUSTRIAL THEME --- */
+        :root {
+            --primary: #3b82f6;
+            --primary-glow: rgba(59, 130, 246, 0.4);
+            --bg-deep: #0b0f1a;
+            --panel-bg: rgba(30, 41, 59, 0.7);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-bright: #f8fafc;
+            --text-dim: #94a3b8;
+            --danger: #ef4444;
+            --success: #10b981;
         }
 
-        .course-card{
-            background:#fff;
-            border-radius:10px;
-            overflow:hidden;
-            box-shadow:0 8px 20px rgba(0,0,0,0.1);
-            transition:0.3s;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background: var(--bg-deep);
+            background-image: 
+                linear-gradient(rgba(59, 130, 246, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(59, 130, 246, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+            color: var(--text-bright);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
         }
 
-        .course-card:hover{
-            transform:translateY(-5px);
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
+
+        /* --- HEADER --- */
+        header {
+            background: rgba(11, 15, 26, 0.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            padding: 18px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
-        .course-card img{
-            width:100%;
-            height:160px;
-            object-fit:cover;
+        .header-flex { display: flex; justify-content: space-between; align-items: center; }
+
+        .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            background: linear-gradient(90deg, #3b82f6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .course-content{
-            padding:15px;
+        nav a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-left: 25px;
+            transition: 0.3s;
         }
 
-        .course-content h3{
-            font-size:18px;
-            margin-bottom:10px;
+        nav a:hover { color: var(--primary); }
+
+        /* --- SECTION TITLE --- */
+        .section-header {
+            margin-top: 50px;
+            margin-bottom: 30px;
         }
 
-        .course-content p{
-            font-size:14px;
-            color:#555;
-            margin-bottom:15px;
+        .section-header h2 {
+            font-size: 2rem;
+            font-weight: 800;
+            letter-spacing: -1px;
         }
 
-        .course-footer{
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
+        .section-header p {
+            color: var(--text-dim);
+            margin-top: 5px;
         }
 
-        .badge{
-            background:#28a745;
-            color:#fff;
-            font-size:12px;
-            padding:4px 8px;
-            border-radius:4px;
+        /* --- COURSES GRID --- */
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding-bottom: 80px;
         }
 
-        .locked{
-            background:#dc3545;
+        .course-card {
+            background: var(--panel-bg);
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            overflow: hidden;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .course-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+        }
+
+        .image-wrapper {
+            position: relative;
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .course-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: 0.5s;
+        }
+
+        .course-card:hover img { transform: scale(1.1); }
+
+        .course-content { padding: 25px; }
+
+        .course-content h3 {
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .course-content p {
+            font-size: 0.95rem;
+            color: var(--text-dim);
+            line-height: 1.5;
+            margin-bottom: 25px;
+            height: 45px;
+            overflow: hidden;
+        }
+
+        .course-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* --- BADGES & BUTTONS --- */
+        .badge {
+            font-size: 0.7rem;
+            font-weight: 800;
+            padding: 5px 12px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge.free { background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid rgba(16, 185, 129, 0.2); }
+        .badge.locked { background: rgba(239, 68, 68, 0.1); color: var(--danger); border: 1px solid rgba(239, 68, 68, 0.2); }
+
+        .btn-view {
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-view:hover {
+            background: #2563eb;
+            box-shadow: 0 0 15px var(--primary-glow);
+        }
+
+        .btn-locked {
+            background: #334155;
+            color: #94a3b8;
+            cursor: not-allowed;
+        }
+
+        footer {
+            text-align: center;
+            padding: 50px;
+            border-top: 1px solid var(--glass-border);
+            color: #475569;
+            font-size: 0.85rem;
         }
     </style>
 </head>
 <body>
 
-<!-- HEADER -->
 <header>
-    <div class="container header-container">
-        <div class="logo">PLC Training LMS</div>
+    <div class="container header-flex">
+        <div class="logo">PLC Training</div>
         <nav>
             <a href="dashboard.html">Dashboard</a>
             <a href="courses.html">Courses</a>
-            <a href="login.html">Logout</a>
+            <a href="#" onclick="logout()" style="color:var(--danger)">Logout</a>
         </nav>
     </div>
 </header>
 
-<!-- COURSES -->
-<section class="container" style="min-height:80vh;">
-    <h2 style="margin-top:30px;">Available Courses</h2>
+<main class="container">
+    <div class="section-header">
+        <h2>Available Courses</h2>
+        <p>Enhance your industrial automation skills with our expert-led modules.</p>
+    </div>
 
     <div class="courses-grid">
 
-        <!-- COURSE 1 -->
         <div class="course-card">
-            <img src="https://img.youtube.com/vi/nS8QsnFlKtM/hqdefault.jpg">
+            <div class="image-wrapper">
+                <img src="https://img.youtube.com/vi/nS8QsnFlKtM/hqdefault.jpg" alt="PLC Basics">
+            </div>
             <div class="course-content">
                 <h3>PLC Basics</h3>
-                <p>Introduction to PLC, Inputs, Outputs & Logic</p>
-
+                <p>Learn core architecture, Digital I/O, and the logic behind industrial controllers.</p>
                 <div class="course-footer">
-                    <span class="badge">FREE</span>
-                    <a href="course-view.html?course=plc-basics" class="btn-primary">View</a>
+                    <span class="badge free">Free Access</span>
+                    <a href="course-view.html?course=plc-basics" class="btn-view">Start Learning</a>
                 </div>
             </div>
         </div>
 
-        <!-- COURSE 2 -->
         <div class="course-card">
-            <img src="https://img.youtube.com/vi/nS8QsnFlKtM/hqdefault.jpg">
+            <div class="image-wrapper">
+                <img src="https://img.youtube.com/vi/nS8QsnFlKtM/hqdefault.jpg" alt="Advanced PLC">
+            </div>
             <div class="course-content">
-                <h3>PLC Advanced Logic</h3>
-                <p>Timers, Counters, Interlocks & Safety</p>
-
+                <h3>Advanced Logic</h3>
+                <p>Deep dive into Timers, Counters, Analog processing, and Safety Interlocks.</p>
                 <div class="course-footer">
-                    <span class="badge locked">LOCKED</span>
-                    <button class="btn-primary" onclick="loginAlert()">View</button>
+                    <span class="badge locked">Locked</span>
+                    <button class="btn-view btn-locked" onclick="loginAlert()">Upgrade Plan</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="course-card">
+            <div class="image-wrapper">
+                <img src="https://img.youtube.com/vi/nS8QsnFlKtM/hqdefault.jpg" alt="HMI SCADA">
+            </div>
+            <div class="course-content">
+                <h3>HMI & SCADA</h3>
+                <p>Designing professional interfaces and real-time data monitoring systems.</p>
+                <div class="course-footer">
+                    <span class="badge locked">Locked</span>
+                    <button class="btn-view btn-locked" onclick="loginAlert()">Upgrade Plan</button>
                 </div>
             </div>
         </div>
 
     </div>
-</section>
+</main>
 
-<!-- FOOTER -->
 <footer>
-    © 2026 Rahul Gupta | PLC Training
+    © 2026 Rahul Gupta | PLC Training Academy • Industrial Excellence
 </footer>
 
-<!-- LOGIN CHECK -->
 <script>
-if(localStorage.getItem("loggedIn") !== "true"){
-    alert("Please login to access courses");
-    window.location.href = "login.html";
-}
-
-function loginAlert(){
-    alert("This course will be available soon / Paid course");
-}
-</script>
-<script>
-/* ===============================
-   BASIC CONTENT PROTECTION
-================================ */
-
-// Disable right click
-document.addEventListener("contextmenu", function(e){
-    e.preventDefault();
-});
-
-// Disable text selection
-document.addEventListener("selectstart", function(e){
-    e.preventDefault();
-});
-
-// Disable key shortcuts
-document.addEventListener("keydown", function(e){
-    if (
-        e.keyCode === 123 || // F12
-        (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || // Ctrl+Shift+I/J
-        (e.ctrlKey && e.keyCode === 85) // Ctrl+U
-    ) {
-        e.preventDefault();
-        alert("⚠️ Developer tools are disabled for content protection.");
+    // Security Check
+    if(localStorage.getItem("loggedIn") !== "true"){
+        alert("Please login to access courses");
+        window.location.href = "login.html";
     }
-});
 
-// Console warning
-console.clear();
-console.log(
-    "%cPLC Training LMS",
-    "color:#1f8ef1;font-size:20px;font-weight:bold;"
-);
-console.log(
-    "%cUnauthorized copying or redistribution is prohibited.",
-    "color:red;font-size:14px;"
-);
+    function logout() {
+        localStorage.removeItem("loggedIn");
+        window.location.href = "login.html";
+    }
+
+    function loginAlert(){
+        alert("🔒 This premium course is currently locked. Please contact admin for access.");
+    }
+
+    // Protection Script
+    document.addEventListener("contextmenu", e => e.preventDefault());
+    document.addEventListener("keydown", e => {
+        if (e.keyCode === 123 || (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || (e.ctrlKey && e.keyCode === 85)) {
+            e.preventDefault();
+        }
+    });
 </script>
 
 </body>
 </html>
-
